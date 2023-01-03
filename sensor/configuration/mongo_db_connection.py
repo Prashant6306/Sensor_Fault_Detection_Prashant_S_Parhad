@@ -1,4 +1,4 @@
-#from sensor.constant.database import DATABASE_NAME
+from sensor.constant.database import DATABASE_NAME
 DATABASE_NAME = "ineuron"
 from sensor.constant.env_variable import MONGODB_URL_KEY
 import certifi

@@ -16,7 +16,7 @@ from sensor.entity.artifact_entity import (
 from sensor.entity.config_entity import DataTransformationConfig
 from sensor.exception import SensorException
 from sensor.logger import logging
-from sensor.ml.model.estimator import TargetValueMapping
+import sensor.ml.model.estimator
 from sensor.utils.main_utils import save_numpy_array_data, save_object
 
 
@@ -75,18 +75,18 @@ class DataTransformation:
             #training dataframe
             input_feature_train_df = train_df.drop(columns=[TARGET_COLUMN], axis=1)
             target_feature_train_df = train_df[TARGET_COLUMN]
-            target_feature_train_df = target_feature_train_df.replace( TargetValueMapping().to_dict())
+            target_feature_train_df = target_feature_train_df.replace(sensor.ml.model.estimator.TargetValueMapping().to_dict())
 
             #testing dataframe
             input_feature_test_df = test_df.drop(columns=[TARGET_COLUMN], axis=1)
             target_feature_test_df = test_df[TARGET_COLUMN]
-            target_feature_test_df = target_feature_test_df.replace(TargetValueMapping().to_dict())
+            target_feature_test_df = target_feature_test_df.replace(sensor.ml.model.estimator.TargetValueMapping().to_dict())
 
             preprocessor_object = preprocessor.fit(input_feature_train_df)
             transformed_input_train_feature = preprocessor_object.transform(input_feature_train_df)
             transformed_input_test_feature =preprocessor_object.transform(input_feature_test_df)
 
-            smt = SMOTETomek(sampling_strategy="minority")
+            smt = SMOTETomek(sampling_strategy=0.8)
 
             input_feature_train_final, target_feature_train_final = smt.fit_resample(
                 transformed_input_train_feature, target_feature_train_df

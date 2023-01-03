@@ -1,3 +1,5 @@
+import pandas as pd
+
 from sensor.configuration.mongo_db_connection import MongoDBClient
 from sensor.exception import SensorException
 import os,sys
@@ -60,7 +62,7 @@ async def predict_route():
         #get data from user csv file
         #conver csv file to dataframe
 
-        df=None
+        df=pd.read_csv("sensor123.csv")
         model_resolver = ModelResolver(model_dir=SAVED_MODEL_DIR)
         if not model_resolver.is_model_exists():
             return Response("Model is not available")
@@ -69,6 +71,7 @@ async def predict_route():
         model = load_object(file_path=best_model_path)
         y_pred = model.predict(df)
         df['predicted_column'] = y_pred
+        df.to_csv(r"C:\Users\lenovo\Desktop\26_12_22\Sensor_Fault_detection_Prashant_S_Parhad\sensor1234.csv")
         df['predicted_column'].replace(TargetValueMapping().reverse_mapping(),inplace=True)
         
         #decide how to return file to user.
