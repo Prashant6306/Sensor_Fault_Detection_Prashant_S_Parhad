@@ -71,7 +71,7 @@ async def predict_route():
         model = load_object(file_path=best_model_path)
         y_pred = model.predict(df)
         df['predicted_column'] = y_pred
-        df.to_csv(r"C:\Users\lenovo\Desktop\26_12_22\Sensor_Fault_detection_Prashant_S_Parhad\sensor1234.csv")
+        df.to_csv(r"C:\Users\lenovo\Desktop\26_12_22\Sensor_Fault_detection_Prashant_S_Parhad\sensor12345.csv")
         df['predicted_column'].replace(TargetValueMapping().reverse_mapping(),inplace=True)
         
         #decide how to return file to user.

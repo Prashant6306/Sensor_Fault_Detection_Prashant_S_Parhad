@@ -1,5 +1,5 @@
 from sensor.constant.database import DATABASE_NAME
-DATABASE_NAME = "ineuron"
+DATABASE_NAME = "ganesh"
 from sensor.constant.env_variable import MONGODB_URL_KEY
 import certifi
 import os
@@ -12,7 +12,7 @@ class MongoDBClient:
         try:
 
             if MongoDBClient.client is None:
-                mongo_db_url = "mongodb+srv://prashantsparhad:Numpy6306@ineuron.jd28xa9.mongodb.net/?retryWrites=true&w=majority"
+                mongo_db_url = "mongodb+srv://prashantsparhad:Numpy123@cluster0.bqnrlf4.mongodb.net/?retryWrites=true&w=majority"
                 print(mongo_db_url)
                 if "localhost" in mongo_db_url:
                     MongoDBClient.client = pymongo.MongoClient(mongo_db_url) 
